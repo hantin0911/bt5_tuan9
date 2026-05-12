@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Customer.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">bai05</a> &gt; <a href="index.source.html" class="el_package">banksystem</a> &gt; <span class="el_source">Customer.java</span></div><h1>Customer.java</h1><pre class="source lang-java linenums">package banksystem;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Lớp Customer đại diện cho một khách hàng.
+ */
+public class Customer {
+  private long idNumber;
+  private String fullName;
+  private List&lt;Account&gt; accountList;
+
+  /**
+   * Khởi tạo một khách hàng mặc định.
+   */
+  public Customer() {
+<span class="nc" id="L18">    this(0L, &quot;&quot;);</span>
+<span class="nc" id="L19">  }</span>
+
+  /**
+   * Khởi tạo một khách hàng với số CMND và họ tên.
+   *
+   * @param idNumber số CMND
+   * @param fullName họ tên
+   */
+<span class="fc" id="L27">  public Customer(long idNumber, String fullName) {</span>
+<span class="fc" id="L28">    this.idNumber = idNumber;</span>
+<span class="fc" id="L29">    this.fullName = fullName;</span>
+<span class="fc" id="L30">    this.accountList = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L31">  }</span>
+
+  public long getIdNumber() {
+<span class="fc" id="L34">    return idNumber;</span>
+  }
+
+  public void setIdNumber(long idNumber) {
+<span class="fc" id="L38">    this.idNumber = idNumber;</span>
+<span class="fc" id="L39">  }</span>
+
+  public String getFullName() {
+<span class="fc" id="L42">    return fullName;</span>
+  }
+
+  public void setFullName(String fullName) {
+<span class="fc" id="L46">    this.fullName = fullName;</span>
+<span class="fc" id="L47">  }</span>
+
+  public List&lt;Account&gt; getAccountList() {
+<span class="fc" id="L50">    return accountList;</span>
+  }
+
+  /**
+   * Thiết lập danh sách tài khoản cho khách hàng.
+   *
+   * @param accountList danh sách tài khoản mới
+   */
+  public void setAccountList(List&lt;Account&gt; accountList) {
+<span class="pc bpc" id="L59" title="1 of 2 branches missed.">    if (accountList == null) {</span>
+<span class="nc" id="L60">      this.accountList = new ArrayList&lt;&gt;();</span>
+    } else {
+<span class="fc" id="L62">      this.accountList = accountList;</span>
+    }
+<span class="fc" id="L64">  }</span>
+
+  /**
+   * Thêm tài khoản cho khách hàng nếu chưa tồn tại.
+   *
+   * @param account tài khoản cần thêm
+   */
+  public void addAccount(Account account) {
+<span class="pc bpc" id="L72" title="1 of 2 branches missed.">    if (account == null) {</span>
+<span class="nc" id="L73">      return;</span>
+    }
+<span class="pc bpc" id="L75" title="1 of 2 branches missed.">    if (!accountList.contains(account)) {</span>
+<span class="fc" id="L76">      accountList.add(account);</span>
+    }
+<span class="fc" id="L78">  }</span>
+
+  /**
+   * Xóa tài khoản khỏi khách hàng.
+   *
+   * @param account tài khoản cần xóa
+   */
+  public void removeAccount(Account account) {
+<span class="nc bnc" id="L86" title="All 2 branches missed.">    if (account == null) {</span>
+<span class="nc" id="L87">      return;</span>
+    }
+<span class="nc" id="L89">    accountList.remove(account);</span>
+<span class="nc" id="L90">  }</span>
+
+  /**
+   * Trả về chuỗi thông tin cơ bản của khách hàng.
+   *
+   * @return chuỗi thông tin khách hàng
+   */
+  public String getCustomerInfo() {
+<span class="fc" id="L98">    return &quot;Số CMND: &quot; + idNumber + &quot;. Họ tên: &quot; + fullName + &quot;.&quot;;</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

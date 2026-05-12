@@ -1,0 +1,31 @@
+name: Java CI with JaCoCo Coverage for Bai05
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: maven
+
+    - name: Build and Verify with Maven (Bai05)
+      run: mvn -B clean verify --file Bai05/pom.xml
+
+    - name: Upload JaCoCo Report
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        name: jacoco-report
+        path: Bai05/target/site/jacoco/

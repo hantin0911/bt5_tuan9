@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CheckingAccount.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">bai05</a> &gt; <a href="index.source.html" class="el_package">banksystem</a> &gt; <span class="el_source">CheckingAccount.java</span></div><h1>CheckingAccount.java</h1><pre class="source lang-java linenums">package banksystem;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+/**
+ * Lớp đại diện cho tài khoản vãng lai.
+ */
+public class CheckingAccount extends Account {
+<span class="fc" id="L10">  private static final Logger logger = LoggerFactory.getLogger(CheckingAccount.class);</span>
+
+  public CheckingAccount(long accountNumber, double balance) {
+<span class="fc" id="L13">    super(accountNumber, balance);</span>
+<span class="fc" id="L14">  }</span>
+
+  @Override
+  public void deposit(double amount) {
+<span class="fc" id="L18">    double initialBalance = getBalance();</span>
+    try {
+<span class="fc" id="L20">      doDepositing(amount);</span>
+<span class="fc" id="L21">      double finalBalance = getBalance();</span>
+<span class="fc" id="L22">      Transaction t = new Transaction(</span>
+          Transaction.TYPE_DEPOSIT_CHECKING,
+          amount,
+          initialBalance,
+          finalBalance);
+<span class="fc" id="L27">      addTransaction(t);</span>
+<span class="fc" id="L28">      logger.info(&quot;Nạp tiền vào tài khoản vãng lai {} thành công: +{}&quot;,</span>
+<span class="fc" id="L29">          getAccountNumber(), amount);</span>
+<span class="nc" id="L30">    } catch (BankException e) {</span>
+<span class="nc" id="L31">      logger.error(&quot;Lỗi nạp tiền vào tài khoản vãng lai {}: {}&quot;,</span>
+<span class="nc" id="L32">          getAccountNumber(), e.getMessage());</span>
+<span class="fc" id="L33">    }</span>
+<span class="fc" id="L34">  }</span>
+
+  @Override
+  public void withdraw(double amount) {
+<span class="fc" id="L38">    double initialBalance = getBalance();</span>
+    try {
+<span class="fc" id="L40">      doWithdrawing(amount);</span>
+<span class="fc" id="L41">      double finalBalance = getBalance();</span>
+<span class="fc" id="L42">      Transaction t = new Transaction(</span>
+          Transaction.TYPE_WITHDRAW_CHECKING,
+          amount,
+          initialBalance,
+          finalBalance);
+<span class="fc" id="L47">      addTransaction(t);</span>
+<span class="fc" id="L48">      logger.info(&quot;Rút tiền từ tài khoản vãng lai {} thành công: -{}&quot;,</span>
+<span class="fc" id="L49">          getAccountNumber(), amount);</span>
+<span class="fc" id="L50">    } catch (Exception e) {</span>
+<span class="fc" id="L51">      logger.error(&quot;Lỗi rút tiền từ tài khoản vãng lai {}: {}&quot;,</span>
+<span class="fc" id="L52">          getAccountNumber(), e.getMessage());</span>
+<span class="fc" id="L53">    }</span>
+<span class="fc" id="L54">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>
