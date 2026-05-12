@@ -11,21 +11,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+      - uses: actions/checkout@v4 # Nâng lên v4
 
-    - name: Set up JDK 17
-      uses: actions/setup-java@v3
-      with:
-        java-version: '17'
-        distribution: 'temurin'
-        cache: maven
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4 # Nâng lên v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
 
-    - name: Build and Verify with Maven (Bai05)
-      run: mvn -B clean verify --file Bai05/pom.xml
+      - name: Build and Verify with Maven
+        # BỎ --file Bai03/pom.xml nếu tệp nằm ở gốc
+        run: mvn -B clean verify
 
-    - name: Upload JaCoCo Report
-      if: always()
-      uses: actions/upload-artifact@v3
-      with:
-        name: jacoco-report
-        path: Bai05/target/site/jacoco/
+      - name: Upload JaCoCo Report
+        if: always()
+        uses: actions/upload-artifact@v4 # Nâng lên v4 để tránh lỗi deprecation
+        with:
+          name: jacoco-report
+          # Điều chỉnh path cho đúng với vị trí target thực tế
+          path: target/site/jacoco/
